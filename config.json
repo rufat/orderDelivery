@@ -1,0 +1,10 @@
+{
+  "port": 8080,
+  "mongodbURL": "mongodb://localhost:27017/oDelivery",
+  "api": {
+    "google": {
+      "key": "<GOOGLE_CLOUD_API_KEY>",
+      "endpoint": "https://maps.googleapis.com/maps/api/distancematrix/json"
+    }
+  }
+}
