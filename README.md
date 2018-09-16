@@ -1,7 +1,3 @@
-Requirements
--------------
-
-
 Usage
 -------------
 **Note:** If you're using *Ubuntu*, run the "start.sh" shell script. If not, you have to install the MongoDB, NodeJS and NPM manually.
