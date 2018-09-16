@@ -4,21 +4,15 @@ const assert = chai.assert;
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-const orderID = 'FBOifgGY8';
+const orderID = 'IGsk7hEdq';
 
 describe('Server', () => {
     it('Placing an order', (done) => {
         chai.request('http://localhost:8080/')
             .post('order')
             .send({
-                origin: {
-                    lat: 40.393326,
-                    long: 49.841216
-                },
-                destination: {
-                    lat: 40.394071,
-                    long: 49.827668
-                }
+                origin: ["40.393326", "49.841216"],
+                destination: ["40.394071", "49.827668"]
             })
             .end((err, res) => {
                 if(err) return done(err);

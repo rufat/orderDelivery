@@ -16,14 +16,8 @@ API
 **Body (JSON):**  
 
     {
-      origin: {
-          lat: <int>,
-          long: <int>
-      },
-      destination: {
-          lat: <int>,
-          long: <int>
-      }
+        origin: ["<latitude>", "longitude"],
+        destination: ["<latitude>", "<longitude>"]
     }
     
 `/order/:orderId` **[PUT]**  

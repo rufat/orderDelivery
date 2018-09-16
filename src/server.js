@@ -50,9 +50,9 @@ class Server {
             this._app.post('/order', async (req, res) => {
                 try {
 
-                    if (req.body.origin && req.body.destination) {
+                    if (typeof req.body.origin === 'object' && typeof req.body.destination === 'object') {
 
-                        const place = await orderModel.place([req.body.origin.lat, req.body.origin.long], [req.body.destination.lat, req.body.destination.long]);
+                        const place = await orderModel.place([req.body.origin[0], req.body.origin[1]], [req.body.destination[0], req.body.destination[1]]);
                         const status = place.httpStatus;
                         delete place.httpStatus;
                         res.status(status).json(place);
@@ -61,7 +61,7 @@ class Server {
 
                         res.status(400).json({
                             success: false,
-                            error: 'Please enter the origin and destination lat/long values.'
+                            error: 'Please enter the origin<Array> and destination<Array> lat/long values.'
                         });
 
                     }
