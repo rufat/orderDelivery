@@ -1,9 +1,10 @@
 Usage
 -------------
 **Note:** If you're using *Ubuntu*, run the "start.sh" shell script. If not, you have to install the MongoDB, NodeJS and NPM manually.
-1. Run MongoDB: `npm run db`
-2. Run ExpressJS server: `npm start`
-3. Run unit testing: `npm test`
+1. Use your [Google Distance Matrix](https://cloud.google.com/maps-platform/routes/) API key and put into config.json.
+2. Run MongoDB: `npm run db`
+3. Run ExpressJS server: `npm start`
+4. Run unit testing: `npm test`
 
 API
 -------------
