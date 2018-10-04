@@ -12,8 +12,7 @@ class Request {
                 method: 'get',
                 qs
             }, (err, response, body) => {
-                console.log(url, qs)
-                console.log(body)
+                
                 if (err) return res({success: false, err, httpStatus: 500});
                 return res(JSON.parse(body));
 
