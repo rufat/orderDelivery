@@ -33,7 +33,7 @@ class Server {
     async start() {
         try{
 
-            var client = await mongClient.connect(config.mongodbURL, {useNewUrlParser: true});
+            const client = await mongClient.connect(config.mongodbURL, {useNewUrlParser: true});
             global.db = client.db();
             global.ObjectID = (id) => new mongodb.ObjectID(id);
             global.typeDate = (date) => new mongodb.Timestamp(date);
@@ -50,9 +50,9 @@ class Server {
                     if (typeof req.body.origin === 'object' && typeof req.body.destination === 'object') {
 
                         const place = await orderModel.place([req.body.origin[0], req.body.origin[1]], [req.body.destination[0], req.body.destination[1]]);                        
-                        const status = place.httpStatus;                        
+                        const status = place.httpStatus;
                         delete place.httpStatus;
-                        res.status(200).json(place);
+                        res.status(status).json(place);
 
                     } else {
 
