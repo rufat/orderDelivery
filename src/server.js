@@ -31,16 +31,14 @@ class Server {
      * @returns {Promise<void>}
      */
     async start() {
-        await mongClient.connect(config.mongodbURL, {useNewUrlParser: true}, async (err, client) => {
+        try{
 
-            if (err) throw err;
-
+            var client = await mongClient.connect(config.mongodbURL, {useNewUrlParser: true});
             global.db = client.db();
             global.ObjectID = (id) => new mongodb.ObjectID(id);
             global.typeDate = (date) => new mongodb.Timestamp(date);
-
             const orderModel = require('./model/order');
-
+            
             this._app.all('/', (req, res) => {
 
                 res.status(200).send('Use /order/:id or /orders');
@@ -49,13 +47,12 @@ class Server {
 
             this._app.post('/order', async (req, res) => {
                 try {
-
                     if (typeof req.body.origin === 'object' && typeof req.body.destination === 'object') {
 
-                        const place = await orderModel.place([req.body.origin[0], req.body.origin[1]], [req.body.destination[0], req.body.destination[1]]);
-                        const status = place.httpStatus;
+                        const place = await orderModel.place([req.body.origin[0], req.body.origin[1]], [req.body.destination[0], req.body.destination[1]]);                        
+                        const status = place.httpStatus;                        
                         delete place.httpStatus;
-                        res.status(status).json(place);
+                        res.status(200).json(place);
 
                     } else {
 
@@ -67,7 +64,7 @@ class Server {
                     }
 
                 } catch (ex) {
-
+                    
                     return res.status(500).json({
                         success: false,
                         error: 'An internal error occurred.',
@@ -140,9 +137,13 @@ class Server {
             });
 
             const httpServer = http.createServer(this._app);
-            httpServer.listen(config.port, () => console.log(`[DEV] Listening: ${config.port}`));
+            httpServer.listen(config.port, () => console.log(`Listening: ${config.port}`));
 
-        });
+        }catch(e){
+
+            throw e;
+
+        }
     }
 }
 
